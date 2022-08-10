@@ -13,13 +13,18 @@ exports.getOneSauce = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
+// Les valeurs de variable doivent etre contenu dans la variable sauce de la requete ?
 exports.createSauce = (req, res, next) => {
 	const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._userId;
-    const sauce = new sauce({
+    const sauce = new Sauce({
         ...sauceObject,
-        userId: req.auth.userId,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        userId: parseInt(req.auth.userId),
+        name: req.body.sauce,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        mainPepper: req.body.sauce,
+        description: req.body.sauce,
+        manufacturer: req.body.sauce
     });
  
     sauce.save()
@@ -50,6 +55,7 @@ exports.modifySauce = (req, res, next) => {
 };
 
 exports.destroySauce = (req, res, next) => {
+    console.log("test")
 	Sauce.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Sauce supprimé !'}))
     .catch(error => res.status(400).json({ error }));

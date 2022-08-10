@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-
 
 const ArraySchema = new mongoose.Schema({ name: String });
 
 const sauceSchema = new mongoose.Schema({
-  userId: {type:Number, required:true, unique: true},
+  userId: {type:Number, required:true},
   name: {type:String, required: true},
   manufacturer: {type:String, required: true},
   description: {type:String, required: true},
@@ -18,6 +16,5 @@ const sauceSchema = new mongoose.Schema({
   usersDisliked: {type:[ArraySchema], default: []},
 });
 
-sauceSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Sauce', sauceSchema);
