@@ -27,30 +27,6 @@ exports.createSauce = (req, res, next) => {
     .catch(error => { res.status(400).json( { error })})
 };
 
-// exports.modifySauce = (req, res, next) => {
-// 	const sauceObject = req.file ? {
-//         ...JSON.parse(req.body.sauce),
-//         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-//     } : { ...req.body };
-//     // erreur sauce introuvable
-//     delete sauceObject._id;
-//     Sauce.findOne({_id: req.params.id})
-//         .then((sauce) => {
-//             if (sauce.userId != req.auth.userId) {
-//                 res.status(401).json({ message : 'Not authorized'});
-//                 console.log('Not authorized')
-//             } else {
-//                 Sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})
-//                 console.log('Sauce modifié!')
-//                 .then(() => res.status(200).json({message : 'Sauce modifié!'}))
-//                 .catch(error => res.status(401).json({ error }));
-//             }
-//         })
-//         .catch((error) => {
-//             res.status(400).json({ error });
-//             console.log("erreur")
-//         });
-// };
 exports.modifySauce = (req, res, next) => {
   const sauceObject = req.file ?
     // Si il existe déjà une image
