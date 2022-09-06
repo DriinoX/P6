@@ -27,6 +27,7 @@ exports.createSauce = (req, res, next) => {
     .catch(error => { res.status(400).json( { error })})
 };
 
+
 exports.modifySauce = (req, res, next) => {
   const sauceObject = req.file ?
     // Si il existe déjà une image
